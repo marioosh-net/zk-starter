@@ -532,12 +532,11 @@ Copyright (C) 2006 Potix Corporation. All Rights Reserved.
 	</client-config>
 	-->
 
-	<!-- Configure the Hibernate SessionFactory Lifecycle.
+	<!-- Configure the Hibernate SessionFactory Lifecycle. -->
 	<listener>
 		<description>Hibernate SessionFactory Lifecycle</description>
 		<listener-class>org.zkoss.zkplus.hibernate.HibernateSessionFactoryListener</listener-class>
 	</listener>
-	-->
 	
 	<!-- Configure the Hibernate configuration file name if not "hibernate.cfg.xml"
 	<preference>
@@ -546,12 +545,11 @@ Copyright (C) 2006 Potix Corporation. All Rights Reserved.
 	</preference>
 	-->
 	
-	<!-- Configure the Hibernate "Open Session In View" Session Lifecycle
+	<!-- Configure the Hibernate "Open Session In View" Session Lifecycle -->
 	<listener>
 		<description>Hibernate "Open Session In View" Session Lifecycle</description>
 		<listener-class>org.zkoss.zkplus.hibernate.OpenSessionInViewListener</listener-class>
 	</listener>
-	 -->
 
 	<!-- Hibernate thread session context handler
 	<listener>
