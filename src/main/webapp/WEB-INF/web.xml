@@ -18,8 +18,60 @@ Copyright (C) 2004 Potix Corporation. All Rights Reserved.
 	<description><![CDATA[zk-starter]]></description>
 	<display-name>zk-starter</display-name>
 
-	<!-- //// -->
-	<!-- ZK -->
+	
+	<!-- ============================= -->
+	<!-- Spring                        -->
+	<!-- ============================= -->
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/applicationContext.xml</param-value>
+	</context-param>
+
+	<!--
+	<listener>
+	    <listener-class>org.zkoss.spring.web.context.CoreContextListener</listener-class>
+	</listener>
+	-->
+
+ 	<!-- Bootstrap the root application context as usual using ContextLoaderListener -->
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!--
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value></param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/spring/*</url-pattern>
+	</servlet-mapping>
+	-->
+	
+	
+	<!-- Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>	
+
+
+	<!-- ============================= -->
+	<!-- ZK                            -->
+	<!-- ============================= -->
+
 	<listener>
 		<description>ZK listener for session cleanup</description>
 		<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>

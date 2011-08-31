@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:security="http://www.springframework.org/schema/security" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx 
+     http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	 http://www.springframework.org/schema/mvc
+	 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+     http://www.springframework.org/schema/security
+     http://www.springframework.org/schema/security/spring-security-3.0.3.xsd	      
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	 http://www.springframework.org/schema/webflow-config
+	 http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd     
+">
+
+	<!-- ============================= -->
+	<!-- Spring MVC                    -->
+	<!-- ============================= -->
+
+	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+	<context:component-scan base-package="net.marioosh.zkstarter" />
+
+	<!-- Configures the @Controller programming model -->
+	<mvc:annotation-driven />
+
+	<!-- Activates various annotations to be detected in bean classes: Spring's @Required and @Autowired, as well 
+ 	as JSR 250's @PostConstruct, @PreDestroy and @Resource (if available), JAX-WS's @WebServiceRef (if available), EJB3's @EJB (if available), 
+ 	and JPA's @PersistenceContext and @PersistenceUnit (if available).  -->
+	<context:annotation-config />
+			
+	<!-- ============================= -->
+	<!-- Data Access                   -->
+	<!-- ============================= -->
+	<!-- postgresql / localhost -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/springonly?charSet=UTF-8" />
+		<property name="username" value="springonly" />
+		<property name="password" value="springonly" />
+	</bean>	
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="schemaUpdate" value="false" />
+        <property name="hibernateProperties">
+            <props>
+            	<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>            
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.connection.autocommit">false</prop>
+            </props>
+        </property>
+		<property name="packagesToScan" value="net.marioosh.zkstarter.model.entities"/>
+    </bean>
+    <!-- manager transakcji -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />	
+
+	<!-- ============================= -->
+	<!-- Spring Security               -->
+	<!-- ============================= -->
+	<!-- disable-url-rewriting="true" - prevent appending ;jsessionid=XXX to urls -->
+	<security:http auto-config="true" use-expressions="true" disable-url-rewriting="true">
+		<security:form-login authentication-failure-url="/login?loginfail=1" login-page="/home" />
+		<security:logout logout-success-url="/home" logout-url="/logout" />
+		<security:intercept-url pattern="/login"  requires-channel="https"/>
+		<security:intercept-url pattern="/home"  requires-channel="http"/>
+		<security:intercept-url pattern="/"  requires-channel="http"/>
+		<!-- niestandardowe porty http / https -->
+		<security:port-mappings>
+			<security:port-mapping http="8080" https="8443"/>
+			<!-- przy przekierowaniu z apache'a na tomcata -->
+			<!-- <security:port-mapping http="80" https="443"/> -->
+		</security:port-mappings>				
+		<security:remember-me key="AeVu0mee" />		
+	</security:http>
+	<security:authentication-manager>
+		<!-- stala lista uzytkownikow 
+		<security:authentication-provider>
+			<security:password-encoder hash="md5" />
+			<security:user-service>
+		        <security:user name="admin"    password="098f6bcd4621d373cade4e832627b4f6" authorities="ROLE_ADMIN" />
+		        <security:user name="user"     password="098f6bcd4621d373cade4e832627b4f6" authorities="ROLE_USER" />
+			</security:user-service>
+		</security:authentication-provider>
+		-->
+		<!-- na dao -->	
+		<security:authentication-provider user-service-ref="userDAO" >
+			<security:password-encoder hash="md5" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>

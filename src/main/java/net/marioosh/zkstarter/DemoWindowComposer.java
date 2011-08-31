@@ -19,7 +19,6 @@ public class DemoWindowComposer extends GenericForwardComposer {
 	
 	public void onClick$okButton() {
 		log.debug("click");
-		times++;
-		textbox.setText("Clicked " + times + " times.");
+		textbox.setText("Clicked " + ++times + " times.");
 	}
 }
