@@ -18,6 +18,17 @@ Copyright (C) 2004 Potix Corporation. All Rights Reserved.
 	<description><![CDATA[zk-starter]]></description>
 	<display-name>zk-starter</display-name>
 
+
+	<!-- //// -->
+	<!-- Spring -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
 	<!-- //// -->
 	<!-- ZK -->
 	<listener>

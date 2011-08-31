@@ -8,6 +8,8 @@
 		<zk.version>5.0.7.1</zk.version>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-1.0-SNAPSHOT-FL-${maven.build.timestamp}</packname>
+		<springVersion>3.0.6.RELEASE</springVersion>
+		<springSecurityVersion>3.0.6.RELEASE</springSecurityVersion>		
 	</properties>
 	<packaging>war</packaging>
 	<name>The zk-starter Project</name>
@@ -97,6 +99,32 @@
 			<version>1.2.16</version>
 		</dependency>
 
+		<!-- SPRING -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${springVersion}</version>
+		</dependency>		
+
+		<!-- spring jdbc / db / etc -->		
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>${springVersion}</version>
+		</dependency>
+		
+		<!-- spring security -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>${springSecurityVersion}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${springSecurityVersion}</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
