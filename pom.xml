@@ -46,7 +46,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.zkoss.theme</groupId>
-			<artifactId>silvertail</artifactId>
+			<artifactId>breeze</artifactId>
 			<version>${zk.version}</version>
 		</dependency>
 		<dependency>
