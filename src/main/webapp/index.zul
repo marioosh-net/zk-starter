@@ -1,5 +1,7 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk>
+	<a href="index2.zul">index2</a><separator />
+	
 	<window title="Hello World!!" border="normal" width="500px" apply="net.marioosh.zkstarter.DemoWindowComposer">
 
 		<div>${springService}</div>
