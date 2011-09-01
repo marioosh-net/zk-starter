@@ -11,9 +11,14 @@
 		
 		<div>USERS</div>
 		<grid>
+			<columns>
+				<column>login</column>
+				<column>firstname</column>
+				<column>lasttname</column>
+			</columns>
 		   <rows>
 		     <row forEach="${springService.users}">
-		       <label value="${each}"/>
+		       <label value="${each.login}"/><label value="${each.firstname}"/><label value="${each.lastname}"/>
 		     </row>
 		   </rows>
 		 </grid>
