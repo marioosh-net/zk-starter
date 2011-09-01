@@ -40,4 +40,34 @@
  	and JPA's @PersistenceContext and @PersistenceUnit (if available).  -->
 	<context:annotation-config />
 
+
+
+	<!-- ============================= -->
+	<!-- Data Access                   -->
+	<!-- ============================= -->
+	<!-- postgresql / localhost -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/springonly?charSet=UTF-8" />
+		<property name="username" value="springonly" />
+		<property name="password" value="springonly" />
+	</bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="schemaUpdate" value="true" />
+        <property name="hibernateProperties">
+            <props>
+            	<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.connection.autocommit">false</prop>
+            </props>
+        </property>
+		<property name="packagesToScan" value="net.marioosh.zkstarter.model.entities"/>        
+    </bean>
+    <!-- manager transakcji -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager" />	
+	
 </beans>

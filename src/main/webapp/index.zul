@@ -1,11 +1,22 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk>
-	<window title="Hello World!!" border="normal" width="500px" 
-		apply="net.marioosh.zkstarter.DemoWindowComposer">
-
+	<window title="Hello World!!" border="normal" width="500px"	apply="net.marioosh.zkstarter.DemoWindowComposer">
+		
+		<div>DATE: ${springService.date}</div>
+		<separator/>
+		
 		<textbox id="textbox"/>
 		<button id="okButton" label="ok"/>
-		<div>DATE: ${springService.date}</div>
-				
+		<separator/>
+		
+		<div>USERS</div>
+		<grid>
+		   <rows>
+		     <row forEach="${springService.users}">
+		       <label value="${each}"/>
+		     </row>
+		   </rows>
+		 </grid>
+						
 	</window>
 </zk>
