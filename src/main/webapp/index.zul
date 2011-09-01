@@ -1,5 +1,8 @@
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
-<zk>
+<zk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.zkoss.org/2005/zul"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+    
 	<window title="Hello World!!" border="normal" width="500px"	apply="net.marioosh.zkstarter.DemoWindowComposer">
 		
 		<div>DATE: ${springService.date}</div>
