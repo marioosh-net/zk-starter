@@ -5,7 +5,7 @@
 
 		<textbox id="textbox"/>
 		<button id="okButton" label="ok"/>
-		<div>springService: ${springService}</div>
+		<div>DATE: ${springService.date}</div>
 				
 	</window>
 </zk>
