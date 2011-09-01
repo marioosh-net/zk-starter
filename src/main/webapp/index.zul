@@ -2,6 +2,8 @@
 <zk>
 	<window title="Hello World!!" border="normal" width="500px" apply="net.marioosh.zkstarter.DemoWindowComposer">
 
+		<div>${springService}</div>
+		<separator />
 		<div>DATE: ${springService.date}</div>
 		<separator />
 
