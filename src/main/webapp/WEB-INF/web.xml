@@ -18,6 +18,11 @@ Copyright (C) 2004 Potix Corporation. All Rights Reserved.
 	<description><![CDATA[zk-starter]]></description>
 	<display-name>zk-starter</display-name>
 
+	<!-- //// -->
+	<!-- ZK Spring -->
+	<listener>
+	    <listener-class>org.zkoss.spring.web.context.CoreContextListener</listener-class>
+	</listener>	
 
 	<!-- //// -->
 	<!-- Spring -->
@@ -28,7 +33,7 @@ Copyright (C) 2004 Potix Corporation. All Rights Reserved.
 	<listener>
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
 	<!-- //// -->
 	<!-- ZK -->
 	<listener>

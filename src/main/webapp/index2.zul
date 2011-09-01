@@ -1,0 +1,7 @@
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+	<window title="Index2" border="normal" width="500px" apply="${zkSpringController}">
+		<textbox id="textbox" />
+		<button id="button" label="ok" />
+	</window>
+</zk>
